@@ -12,7 +12,7 @@ const Input = styled.input`
   }
 `;
 
-const Filter = ({ filter, onChange }) => {
+const Filter = ({ onFilter, onChange }) => {
   return (
     <div>
       <p>Find contacts by name</p>
@@ -20,7 +20,7 @@ const Filter = ({ filter, onChange }) => {
         type="text"
         placeholder="Filter"
         name="filter"
-        value={filter}
+        value={onFilter}
         onChange={onChange}
       />
     </div>
@@ -28,7 +28,7 @@ const Filter = ({ filter, onChange }) => {
 };
 
 Filter.propTypes = {
-  filter: PropTypes.string.isRequired,
+  onFilter: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 

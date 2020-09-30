@@ -1,28 +1,30 @@
 import { add, del, filter } from './contactsTypes';
 
-const addContact = contact => {
+const addContact = ({ name, number, id }) => {
   return {
     type: add,
     payload: {
-      contact,
+      id,
+      name,
+      number,
     },
   };
 };
 
-const delContact = contact => {
+const delContact = contactId => {
   return {
     type: del,
     payload: {
-      contact,
+      contactId,
     },
   };
 };
 
-const filterContacts = filterValue => {
+const filterContacts = ({ target }) => {
   return {
     type: filter,
     payload: {
-      filterValue,
+      value: target.value,
     },
   };
 };

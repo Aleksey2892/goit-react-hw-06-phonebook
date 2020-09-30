@@ -13,7 +13,7 @@ export default class ContactForm extends Component {
     onAddContact: PropTypes.func.isRequired,
   };
 
-  state = INITIAL_STATE;
+  state = { ...INITIAL_STATE };
 
   resetState = () => {
     this.setState(INITIAL_STATE);
