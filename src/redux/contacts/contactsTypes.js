@@ -1,3 +1,3 @@
-export const add = 'CONTACT_ADD';
-export const del = 'CONTACT_DEL';
-export const filter = 'CONTACTS_FILTER';
+export const ADD = 'contacts/add';
+export const DEL = 'contacts/del';
+export const FILTER = 'contacts/filter';

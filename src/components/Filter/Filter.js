@@ -12,24 +12,22 @@ const Input = styled.input`
   }
 `;
 
-const Filter = ({ onFilter, onChange }) => {
-  return (
-    <div>
-      <p>Find contacts by name</p>
-      <Input
-        type="text"
-        placeholder="Filter"
-        name="filter"
-        value={onFilter}
-        onChange={onChange}
-      />
-    </div>
-  );
-};
+const Filter = ({ filterValue, onFilter }) => (
+  <div>
+    <p>Find contacts by name</p>
+    <Input
+      type="text"
+      placeholder="Filter"
+      name="filter"
+      value={filterValue}
+      onChange={onFilter}
+    />
+  </div>
+);
 
 Filter.propTypes = {
-  onFilter: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  filterValue: PropTypes.string.isRequired,
+  onFilter: PropTypes.func.isRequired,
 };
 
 export default Filter;

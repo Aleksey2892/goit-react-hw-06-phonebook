@@ -1,8 +1,8 @@
-import { add, del, filter } from './contactsTypes';
+import { ADD, DEL, FILTER } from './contactsTypes';
 
 const addContact = ({ name, number, id }) => {
   return {
-    type: add,
+    type: ADD,
     payload: {
       id,
       name,
@@ -13,7 +13,7 @@ const addContact = ({ name, number, id }) => {
 
 const delContact = contactId => {
   return {
-    type: del,
+    type: DEL,
     payload: {
       contactId,
     },
@@ -22,7 +22,7 @@ const delContact = contactId => {
 
 const filterContacts = ({ target }) => {
   return {
-    type: filter,
+    type: FILTER,
     payload: {
       value: target.value,
     },
