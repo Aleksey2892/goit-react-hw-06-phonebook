@@ -1,32 +1,39 @@
-import { ADD, DEL, FILTER } from './contactsTypes';
+import { createAction } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
-const addContact = ({ name, number, id }) => {
-  return {
-    type: ADD,
-    payload: {
-      id,
-      name,
-      number,
-    },
-  };
-};
+const addContact = createAction('contacts/add', ({ name, number }) => ({
+  payload: {
+    id: uuidv4(),
+    name,
+    number,
+  },
+}));
+const delContact = createAction('contacts/del');
+const filterContacts = createAction('contacts/filter', ({ target }) => ({
+  payload: target.value,
+}));
 
-const delContact = contactId => {
-  return {
-    type: DEL,
-    payload: {
-      contactId,
-    },
-  };
-};
+// const addContact = ({ name, number }) => ({
+//   type: actionTypes.ADD,
+//   payload: {
+//     id: uuidv4(),
+//     name,
+//     number,
+//   },
+// });
 
-const filterContacts = ({ target }) => {
-  return {
-    type: FILTER,
-    payload: {
-      value: target.value,
-    },
-  };
-};
+// const delContact = contactId => ({
+//   type: actionTypes.DEL,
+//   payload: {
+//     contactId,
+//   },
+// });
+
+// const filterContacts = ({ target }) => ({
+//   type: actionTypes.FILTER,
+//   payload: {
+//     value: target.value,
+//   },
+// });
 
 export default { addContact, delContact, filterContacts };

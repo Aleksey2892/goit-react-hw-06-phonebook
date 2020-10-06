@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
-import { ADD, DEL, FILTER } from './contactsTypes';
-import { v4 as uuidv4 } from 'uuid';
+import actionTypes from './contactsTypes';
 
 const INITIAL_ITEMS = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -10,36 +9,19 @@ const INITIAL_ITEMS = [
 ];
 
 const contactAddValue = (state, payload) => {
-  const isCheckDuplicate = state.find(
-    el => el.name.toLocaleLowerCase() === payload.name.toLocaleLowerCase(),
-  );
-
-  if (isCheckDuplicate) {
-    alert(`${payload.name.toUpperCase()} is already in contacts`);
-    return [...state];
-  }
-
-  payload.id = uuidv4();
-
-  localStorage.setItem('contacts', JSON.stringify([payload, ...state]));
-
   return [payload, ...state];
 };
 
 const contactDelValue = (state, payload) => {
-  localStorage.setItem(
-    'contacts',
-    JSON.stringify(state.filter(({ id }) => id !== payload.contactId)),
-  );
-  return state.filter(({ id }) => id !== payload.contactId);
+  return state.filter(contact => contact.id !== payload);
 };
 
 const itemsReducer = (state = INITIAL_ITEMS, { type, payload }) => {
   switch (type) {
-    case ADD:
+    case actionTypes.ADD:
       return contactAddValue(state, payload);
 
-    case DEL:
+    case actionTypes.DEL:
       return contactDelValue(state, payload);
 
     default:
@@ -49,8 +31,8 @@ const itemsReducer = (state = INITIAL_ITEMS, { type, payload }) => {
 
 const filterReducer = (state = '', { type, payload }) => {
   switch (type) {
-    case FILTER:
-      return (state = payload.value);
+    case actionTypes.FILTER:
+      return payload;
 
     default:
       return state;

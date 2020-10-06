@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import actionTypes from '../../redux/contacts/contactsActions';
+
 import PropTypes from 'prop-types';
 
 import s from '../../styled';
@@ -8,9 +11,9 @@ const INITIAL_STATE = {
   number: '',
 };
 
-export default class ContactForm extends Component {
+class ContactForm extends Component {
   static propTypes = {
-    onAddContact: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
   };
 
   state = { ...INITIAL_STATE };
@@ -32,7 +35,7 @@ export default class ContactForm extends Component {
     if (name && number) {
       const NewContact = { name, number };
 
-      this.props.onAddContact(NewContact);
+      this.props.onSubmit(NewContact);
       this.resetState();
     }
   };
@@ -70,3 +73,9 @@ export default class ContactForm extends Component {
     );
   }
 }
+
+const mapDispatchToProps = {
+  onSubmit: actionTypes.addContact,
+};
+
+export default connect(null, mapDispatchToProps)(ContactForm);
