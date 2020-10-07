@@ -1,25 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import contactsActions from '../../redux/contacts/contactsActions';
 
 import PropTypes from 'prop-types';
 
+import ContactListItem from './ContactListItem';
+
 import s from '../../styled';
 
-const ContactList = ({ contacts, onRemoveContact }) => {
+const ContactList = ({ contacts }) => {
   const isShowContacts = contacts.length > 0;
 
   return (
     <>
       {isShowContacts && (
         <s.Ul>
-          {contacts.map(({ id, name, number }) => (
-            <s.liItem key={id}>
-              {name}: {number}
-              <s.BtnRemove type="button" onClick={() => onRemoveContact(id)}>
-                Delete
-              </s.BtnRemove>
-            </s.liItem>
+          {contacts.map(({ id }) => (
+            <ContactListItem key={id} id={id} />
           ))}
         </s.Ul>
       )}
@@ -38,9 +34,9 @@ const mapStateToProps = state => {
       return items.filter(item =>
         item.name.toLowerCase().includes(lowerCaseFilter),
       );
-    } else {
-      return items;
     }
+
+    return items;
   };
 
   return {
@@ -48,12 +44,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = {
-  onRemoveContact: contactsActions.delContact,
-};
-
 ContactList.propTypes = {
-  isShowContacts: PropTypes.bool.isRequired,
   contacts: PropTypes.arrayOf(
     PropTypes.exact({
       id: PropTypes.string.isRequired,
@@ -61,16 +52,6 @@ ContactList.propTypes = {
       number: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
-  onRemoveContact: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
-
-// const getFilterContacts = ({ items, filter }) => {
-//   if (filter) {
-//     return items.filter(contact =>
-//       contact.name.toLowerCase().includes(filter.toLowerCase()),
-//     );
-//   }
-//   return items;
-// };
+export default connect(mapStateToProps)(ContactList);
