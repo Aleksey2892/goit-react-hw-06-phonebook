@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import contactsActions from '../../redux/contacts/contactsActions';
-
+import contactsOperations from '../../redux/contacts/contactsOperations';
 import PropTypes from 'prop-types';
-
 import s from '../../styled';
 
 const ContactListItem = ({ name, number, onRemoveContact }) => (
@@ -18,16 +16,15 @@ const ContactListItem = ({ name, number, onRemoveContact }) => (
 const mapStateToProps = (state, ownProps) => {
   const itemData = state.contacts.items.find(item => ownProps.id === item.id);
 
-  return {
-    ...itemData,
-  };
+  return { ...itemData };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onRemoveContact: () => dispatch(contactsActions.delContact(ownProps.id)),
+  onRemoveContact: () => dispatch(contactsOperations.delContact(ownProps.id)),
 });
 
 ContactListItem.propTypes = {
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
   onRemoveContact: PropTypes.func.isRequired,

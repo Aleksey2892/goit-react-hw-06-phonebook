@@ -36,12 +36,10 @@ const Filter = ({ contacts, filterValue, onFilter }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    contacts: state.contacts.items,
-    filterValue: state.contacts.filter,
-  };
-};
+const mapStateToProps = state => ({
+  contacts: state.contacts.items,
+  filterValue: state.contacts.filter,
+});
 
 const mapDispatchToProps = {
   onFilter: contactsActions.filterContacts,

@@ -1,9 +1,10 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import contactsOperations from '../redux/contacts/contactsOperations';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
-
 import styled from 'styled-components';
 
 const Div = styled.div`
@@ -18,18 +19,34 @@ const TitleH1 = styled.h1`
 `;
 const TitleH2 = styled(TitleH1)``;
 
-export default function App() {
-  return (
-    <Div>
-      <TitleH1>Phonebook</TitleH1>
+class App extends React.Component {
+  static propTypes = {
+    loadingPageContacts: PropTypes.func.isRequired,
+  };
 
-      <ContactForm />
+  componentDidMount() {
+    this.props.loadingPageContacts();
+  }
 
-      <TitleH2>Contacts</TitleH2>
+  render() {
+    return (
+      <Div>
+        <TitleH1>Phonebook</TitleH1>
 
-      <Filter />
+        <ContactForm />
 
-      <ContactList />
-    </Div>
-  );
+        <TitleH2>Contacts</TitleH2>
+
+        <Filter />
+
+        <ContactList />
+      </Div>
+    );
+  }
 }
+
+const mapDispatchToProps = {
+  loadingPageContacts: contactsOperations.fetchContacts,
+};
+
+export default connect(null, mapDispatchToProps)(App);
