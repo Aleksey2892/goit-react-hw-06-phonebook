@@ -40,9 +40,9 @@ class ContactForm extends Component {
     const newContact = { name, number };
 
     if (name && number) {
-      const isDuplicate = this.props.contacts.find(contact => {
-        return contact.name === name;
-      });
+      const isDuplicate = this.props.contacts.find(
+        contact => contact.name === name,
+      );
 
       if (isDuplicate) return alert(`'${name}' is already in contacts`);
 

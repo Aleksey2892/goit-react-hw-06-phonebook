@@ -5,7 +5,7 @@ const store = configureStore({
   reducer: {
     contacts: contactsReducer,
   },
-  middleware: [...getDefaultMiddleware()],
+  middleware: getDefaultMiddleware(),
 });
 
 export default store;
