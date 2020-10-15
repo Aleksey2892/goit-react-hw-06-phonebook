@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import contactsActions from '../../redux/contacts/contactsActions';
-
+import contactsSelectors from '../../redux/contacts/contactsSelectors';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
@@ -36,15 +36,6 @@ const Filter = ({ contacts, filterValue, onFilter }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  contacts: state.contacts.items,
-  filterValue: state.contacts.filter,
-});
-
-const mapDispatchToProps = {
-  onFilter: contactsActions.filterContacts,
-};
-
 Filter.propTypes = {
   filterValue: PropTypes.string.isRequired,
   onFilter: PropTypes.func.isRequired,
@@ -55,6 +46,14 @@ Filter.propTypes = {
       number: PropTypes.string.isRequired,
     }),
   ).isRequired,
+};
+
+const mapStateToProps = state => ({
+  contacts: contactsSelectors.getContacts(state),
+  filterValue: contactsSelectors.getFilterValue(state),
+});
+const mapDispatchToProps = {
+  onFilter: contactsActions.filterContacts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

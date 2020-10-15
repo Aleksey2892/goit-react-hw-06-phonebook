@@ -21,11 +21,11 @@ const TitleH2 = styled(TitleH1)``;
 
 class App extends React.Component {
   static propTypes = {
-    loadingPageContacts: PropTypes.func.isRequired,
+    contactsWithLoading: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    this.props.loadingPageContacts();
+    this.props.contactsWithLoading();
   }
 
   render() {
@@ -46,7 +46,7 @@ class App extends React.Component {
 }
 
 const mapDispatchToProps = {
-  loadingPageContacts: contactsOperations.fetchContacts,
+  contactsWithLoading: contactsOperations.fetchContacts,
 };
 
 export default connect(null, mapDispatchToProps)(App);

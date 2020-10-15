@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import contactsSelectors from '../../redux/contacts/contactsSelectors';
 import PropTypes from 'prop-types';
 import ContactListItem from './ContactListItem';
 import s from '../../styled';
@@ -22,25 +23,6 @@ const ContactList = ({ contacts }) => {
   );
 };
 
-const mapStateToProps = state => {
-  const { items, filter } = state.contacts;
-  const lowerCaseFilter = filter.toLowerCase();
-
-  const getWithFilterContacts = () => {
-    if (filter) {
-      return items.filter(item =>
-        item.name.toLowerCase().includes(lowerCaseFilter),
-      );
-    }
-
-    return items;
-  };
-
-  return {
-    contacts: getWithFilterContacts(),
-  };
-};
-
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.exact({
@@ -50,5 +32,9 @@ ContactList.propTypes = {
     }).isRequired,
   ).isRequired,
 };
+
+const mapStateToProps = state => ({
+  contacts: contactsSelectors.getWithFilterContacts(state),
+});
 
 export default connect(mapStateToProps)(ContactList);
