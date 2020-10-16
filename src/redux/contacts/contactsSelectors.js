@@ -9,11 +9,11 @@ const getWithFilterContacts = createSelector(
   (contacts, filter) => {
     const toLowerCaseFilter = filter.toLowerCase();
 
-    const visibleContacts = contacts.filter(item =>
+    const filteredContacts = contacts.filter(item =>
       item.name.toLowerCase().includes(toLowerCaseFilter),
     );
 
-    return filter ? visibleContacts : contacts;
+    return filter ? filteredContacts : contacts;
   },
 );
 
